@@ -1,0 +1,22 @@
+title: VMware Authentication Bypass Vulnerability CVE-2022-22972
+status: experimental
+description: Detects exploitation attempts using POST request vulnerability CVE-2022-22972 in the VMware Workspace ONE Access, Identity Manager and vRealize Automation products.
+author: Emre Coban
+date: 2022/05/27
+references:
+    - https://www.horizon3.ai/vmware-authentication-bypass-vulnerability-cve-2022-22972-technical-deep-dive/
+    - https://kb.vmware.com/s/article/88438
+tags:
+    - attack.initial_access
+    - attack.t1190
+logsource:
+    category: webserver
+detection:
+    selection:
+        cs-method: 'POST'
+        sc-status: 200
+        c-uri|contains: '/SAAS/auth/login/embeddedauthbroker/callback'
+    condition: selection
+falsepositives:
+    - Vulnerability Scanning
+level: high
