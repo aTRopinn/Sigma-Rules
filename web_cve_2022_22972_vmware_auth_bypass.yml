@@ -10,7 +10,7 @@ tags:
     - attack.initial_access
     - attack.t1190
 logsource:
-    category: webserver
+    category: proxy
 detection:
     selection:
         cs-method: 'POST'
