@@ -1,0 +1,20 @@
+title: Grafana 8.4.3 Directory Traversel
+status: experimental
+description: Detect Directory Traversel for Grafana
+author: Yunus Emre Çoban
+references:
+  - https://github.com/BrotherOfJhonny/grafana/blob/main/README.md
+date: 2022/06/07
+logsource:
+  category: proxy
+detection:
+  selection:
+    cs-method: 'GET'
+    c-uri|endswith: '/dashboard/snapshot/%7B%7Bconstructor.constructor'/.. /.. /.. /.. /.. /.. /.. /.. /etc/passwd?orgId=1'
+    sc-status: 404
+  condition: selection
+falsepositives:
+  - Unknown
+level: high
+tags:
+  - attack.t1083
